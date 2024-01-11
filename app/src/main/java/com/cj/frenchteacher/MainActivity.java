@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button black, green, purple, red, yellow;
     MediaPlayer mediaPlayer;
     @Override
@@ -20,44 +20,36 @@ public class MainActivity extends AppCompatActivity {
         purple = findViewById(R.id.purple);
         red = findViewById(R.id.red);
         yellow = findViewById(R.id.yellow);
-        black.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.black);
-                mediaPlayer.start();
-            }
-        });
 
-        green.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.green);
-                mediaPlayer.start();
-            }
-        });
+        black.setOnClickListener(this);
+        green.setOnClickListener(this);
+        purple.setOnClickListener(this);
+        red.setOnClickListener(this);
+        yellow.setOnClickListener(this);
+    }
 
-        purple.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.purple);
-                mediaPlayer.start();
-            }
-        });
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
 
-        red.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.red);
-                mediaPlayer.start();
-            }
-        });
-
-        yellow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.yellow);
-                mediaPlayer.start();
-            }
-        });
+        if (id == R.id.black) {
+            playSound(R.raw.black);
+        }
+        if (id == R.id.green) {
+            playSound(R.raw.green);
+        }
+        if (id == R.id.purple) {
+            playSound(R.raw.purple);
+        }
+        if (id == R.id.red) {
+            playSound(R.raw.red);
+        }
+        if (id == R.id.yellow) {
+            playSound(R.raw.yellow);
+        }
+    }
+    private void playSound(int soundId) {
+        mediaPlayer = MediaPlayer.create(this, soundId);
+        mediaPlayer.start();
     }
 }
